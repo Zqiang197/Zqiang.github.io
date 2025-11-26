@@ -86,34 +86,34 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
   const labels = STATIC_TEXT[lang];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none print:hidden">
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 flex flex-col overflow-hidden pointer-events-auto"
+            className="mb-4 w-[350px] sm:w-[400px] h-[500px] bg-zinc-900 rounded-2xl shadow-2xl border border-zinc-800 flex flex-col overflow-hidden pointer-events-auto"
           >
             {/* Header */}
-            <div className="p-4 border-b border-gray-100 dark:border-zinc-800 flex justify-between items-center bg-gray-50/50 dark:bg-zinc-900/50 backdrop-blur-md">
+            <div className="p-4 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/50 backdrop-blur-md">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-indigo-500" />
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">AI Resume Assistant</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Powered by Gemini 2.5</p>
+                  <h3 className="text-sm font-semibold text-gray-100">AI Resume Assistant</h3>
+                  <p className="text-xs text-gray-400">Powered by Gemini 2.5</p>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-gray-200 dark:hover:bg-zinc-800 rounded-full transition-colors"
+                className="p-1 hover:bg-zinc-800 rounded-full transition-colors"
               >
                 <X className="w-5 h-5 text-gray-500" />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-zinc-950/30">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950/30">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -123,7 +123,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
                     className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${
                       msg.role === 'user'
                         ? 'bg-indigo-600 text-white rounded-br-none'
-                        : 'bg-white dark:bg-zinc-800 text-gray-800 dark:text-gray-200 border border-gray-100 dark:border-zinc-700 rounded-bl-none shadow-sm'
+                        : 'bg-zinc-800 text-gray-200 border border-zinc-700 rounded-bl-none shadow-sm'
                     }`}
                   >
                     {msg.text}
@@ -132,7 +132,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-white dark:bg-zinc-800 p-3 rounded-2xl rounded-bl-none border border-gray-100 dark:border-zinc-700 shadow-sm">
+                  <div className="bg-zinc-800 p-3 rounded-2xl rounded-bl-none border border-zinc-700 shadow-sm">
                     <Loader2 className="w-4 h-4 animate-spin text-gray-400" />
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
             </div>
 
             {/* Input */}
-            <div className="p-3 bg-white dark:bg-zinc-900 border-t border-gray-100 dark:border-zinc-800">
+            <div className="p-3 bg-zinc-900 border-t border-zinc-800">
               <div className="relative flex items-center">
                 <input
                   type="text"
@@ -149,7 +149,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyPress}
                   placeholder={labels.chatInput}
-                  className="w-full bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-gray-100 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                  className="w-full bg-zinc-800 text-gray-100 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
                 />
                 <button
                   onClick={handleSend}
@@ -172,7 +172,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ lang }) => {
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
         {!isOpen && (
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-zinc-900"></span>
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-zinc-900"></span>
         )}
       </motion.button>
     </div>
