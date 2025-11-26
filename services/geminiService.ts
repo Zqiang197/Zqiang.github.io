@@ -1,7 +1,7 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 import { RESUME_DATA } from "../constants";
 
-// Fix for TypeScript/Deployment: Declare process and import.meta to avoid "Cannot find name" errors
+// Fix for TypeScript/Deployment: Declare process and import.meta to avoid "Cannot find name" errors during build
 declare const process: { env: { [key: string]: string | undefined } };
 declare const importMeta: { env: { [key: string]: string | undefined } };
 
