@@ -28,12 +28,20 @@ const formatResumeForPrompt = (): string => {
 };
 
 export const initializeChat = async (): Promise<void> => {
-  if (!process.env.API_KEY) {
+  // Safely check for API key to avoid "process is not defined" crashes in pure browser builds
+  let apiKey: string | undefined;
+  try {
+    apiKey = process.env.API_KEY;
+  } catch (e) {
+    // Ignore reference error if process is undefined
+  }
+
+  if (!apiKey) {
     console.warn("API Key not found. Chat functionality will be limited.");
     return;
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey });
 
   chatSession = ai.chats.create({
     model: 'gemini-2.5-flash',
